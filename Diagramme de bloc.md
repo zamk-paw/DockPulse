@@ -6,8 +6,13 @@ flowchart TD
     Rsyslog["Rsyslog (Serveur de logs)"]
   end
 
-  User -->|Action (ex: connexion)| Dockpulse
-  Dockpulse -->|Gère l'action et génère un log| Dockpulse
-  Dockpulse -->|Envoie message de log| Rsyslog
-  Rsyslog -->|Traite et stocke log| Rsyslog
-  Rsyslog -->|Accusé de réception| Dockpulse
+  User --> Action1[Effectue une action (ex: connexion)]
+  Action1 --> Dockpulse
+  Dockpulse --> Action2[Gère l'action et génère un log]
+  Action2 --> Dockpulse
+  Dockpulse --> Action3[Envoie message de log]
+  Action3 --> Rsyslog
+  Rsyslog --> Action4[Traite et stocke log]
+  Action4 --> Rsyslog
+  Rsyslog --> Action5[Accusé de réception]
+  Action5 --> Dockpulse
