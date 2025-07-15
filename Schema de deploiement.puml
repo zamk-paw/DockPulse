@@ -1,0 +1,19 @@
+@startuml
+title Diagramme de blocs - Dockpulse et rsyslog
+
+package "Système de log applicatif" {
+  
+  [Utilisateur] as User
+  
+  [Dockpulse\n(Serveur d'application)] as Dockpulse
+  [rsyslog\n(Serveur de logs)] as Rsyslog
+
+  User --> Dockpulse : Effectue une action\n(ex : connexion)
+  Dockpulse --> Dockpulse : Gère l'action\net génère un log
+  Dockpulse --> Rsyslog : Envoie le message de log
+  Rsyslog --> Rsyslog : Traite et stocke le log
+  Rsyslog --> Dockpulse : Accusé de réception
+
+}
+
+@enduml
