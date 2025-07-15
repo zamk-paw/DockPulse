@@ -11,7 +11,7 @@ flowchart TD
     Rsyslog["rsyslog\n(Serveur de logs)"]
 
     %% Flèches / relations
-    Utilisateur -->|Effectue une action\n(ex: connexion)| Dockpulse
+    Utilisateur -->|Effectue une action (ex: connexion)| Dockpulse
     Dockpulse -->|Gère l'action utilisateur| Dockpulse
     Dockpulse -->|Génère un message de log| Dockpulse
     Dockpulse -->|Envoie le message de log| Rsyslog
