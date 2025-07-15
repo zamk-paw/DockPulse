@@ -2,11 +2,11 @@
 flowchart TD
   subgraph "Système de log applicatif"
     User[Utilisateur]
-    Dockpulse["Dockpulse (Serveur d'application)"]
-    Rsyslog["Rsyslog (Serveur de logs)"]
+    Dockpulse["Dockpulse - Serveur d'application"]
+    Rsyslog["Rsyslog - Serveur de logs"]
   end
 
-  User --> Action1[Effectue une action (ex: connexion)]
+  User --> Action1[Effectue une action ex: connexion]
   Action1 --> Dockpulse
   Dockpulse --> Action2[Gère l'action et génère un log]
   Action2 --> Dockpulse
