@@ -1,4 +1,4 @@
-# Tutoriel minimal rsyslog + MariaDB - Copier/Coller
+# Tutoriel rsyslog + MariaDB | Log
 
 ## 1. Configuration sudo
 
@@ -148,4 +148,41 @@ logger -p local3.info "TEST MESSAGE"
 docker ps
 sudo systemctl status rsyslog
 ctop
+```
+
+# Tutoriel serveur client 
+
+## Configuration rsyslog pour rediriger vers serveur distant
+
+```bash
+sudo tee /etc/rsyslog.d/docker-remote.conf << 'EOF'
+Rediriger tous les logs Docker vers serveur distant
+if $programname startswith "docker/" then {
+    @@IP_SERVEUR_LOGS:514
+    stop
+}
+EOF
+```
+
+## Configuration Docker pour utiliser syslog
+```bash
+sudo tee /etc/docker/daemon.json << 'EOF'
+{
+  "log-driver": "syslog",
+  "log-opts": {
+    "syslog-address": "unixgram:///dev/log",
+    "tag": "docker/{{.Name}}"
+  }
+}
+EOF
+```
+## Redémarrer les services
+```bash
+sudo systemctl restart rsyslog
+sudo systemctl restart docker
+```
+
+## Lancer un conteneur test
+```bash
+docker run -d --name test-nginx nginx:latest
 ```
