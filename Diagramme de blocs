@@ -1,5 +1,3 @@
-# Diagramme de blocs - Dockpulse et rsyslog
-
 ```plantuml
 @startuml
 title Diagramme de blocs - Dockpulse et rsyslog
