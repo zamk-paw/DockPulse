@@ -1,22 +1,13 @@
-graph TD
-    U[Utilisateur]
+```mermaid
+flowchart TD
+  subgraph "Système de log applicatif"
+    User[Utilisateur]
+    Dockpulse[Dockpulse<br>(Serveur d'application)]
+    Rsyslog[Rsyslog<br>(Serveur de logs)]
+  end
 
-    subgraph DP[Dockpulse (Serveur d'application)]
-        DP1[Gestion des actions utilisateur]
-        DP2[Création de logs]
-        DP3[Transmission logs vers rsyslog]
-    end
-
-    subgraph RS[rsyslog (Serveur de logs)]
-        RS1[Réception des logs]
-        RS2[Analyse / Traitement des logs]
-        RS3[Accusé de réception]
-    end
-
-    U --> DP1
-    DP1 --> DP2
-    DP2 --> DP3
-    DP3 --> RS1
-    RS1 --> RS2
-    RS2 --> RS3
-    RS3 --> DP3
+  User -->|Effectue une action<br>(ex : connexion)| Dockpulse
+  Dockpulse -->|Gère l'action<br>et génère un log| Dockpulse
+  Dockpulse -->|Envoie le message de log| Rsyslog
+  Rsyslog -->|Traite et stocke le log| Rsyslog
+  Rsyslog -->|Accusé de réception| Dockpulse
