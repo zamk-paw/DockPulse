@@ -1,6 +1,6 @@
 # Diagramme de blocs - Dockpulse et rsyslog
 
-```plantuml
+```mermaid
 @startuml
 title Diagramme de blocs - Dockpulse et rsyslog
 
