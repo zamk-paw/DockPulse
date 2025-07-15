@@ -1,4 +1,7 @@
+# Diagramme de blocs - Dockpulse et rsyslog
+
 ```plantuml
+@startuml
 title Diagramme de blocs - Dockpulse et rsyslog
 
 actor Utilisateur
@@ -12,3 +15,5 @@ Dockpulse --> Dockpulse : Génère un message de log
 Dockpulse --> Rsyslog : Envoie le message de log
 Rsyslog --> Rsyslog : Reçoit et traite le log
 Rsyslog --> Dockpulse : Accusé de réception
+
+@enduml
