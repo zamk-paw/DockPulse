@@ -1,19 +1,20 @@
 ```mermaid
 flowchart TD
-    %% Titre du diagramme
-    %% Diagramme de blocs - Dockpulse et rsyslog
-
-    %% Acteur
     Utilisateur["Utilisateur"]
-
-    %% Blocs
     Dockpulse["Dockpulse\n(Serveur d'application)"]
     Rsyslog["rsyslog\n(Serveur de logs)"]
 
-    %% Flèches / relations
-    Utilisateur -->|Effectue une action (ex: connexion)| Dockpulse
-    Dockpulse -->|Gère l'action utilisateur| Dockpulse
-    Dockpulse -->|Génère un message de log| Dockpulse
-    Dockpulse -->|Envoie le message de log| Rsyslog
-    Rsyslog -->|Reçoit et traite le log| Rsyslog
-    Rsyslog -->|Accusé de réception| Dockpulse
+    %% Flèches sans label à cause de la syntaxe Mermaid
+    Utilisateur --> Dockpulse
+    Dockpulse --> Dockpulse
+    Dockpulse --> Dockpulse
+    Dockpulse --> Rsyslog
+    Rsyslog --> Rsyslog
+    Rsyslog --> Dockpulse
+
+    %% Légende texte (à placer dans le fichier md pour expliquer les relations)
+    %% Utilisateur effectue une action (ex: connexion) --> Dockpulse
+    %% Dockpulse gère l'action utilisateur et génère un message de log
+    %% Dockpulse envoie le message de log --> Rsyslog
+    %% Rsyslog reçoit et traite le log
+    %% Rsyslog envoie un accusé de réception --> Dockpulse
