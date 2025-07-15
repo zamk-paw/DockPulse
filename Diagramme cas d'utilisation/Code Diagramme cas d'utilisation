@@ -1,0 +1,34 @@
+@startuml
+title Cas d'utilisation - DockPulse et gestion des logs
+
+actor Utilisateur as User
+
+rectangle "Application DockPulse" {
+    usecase "Se connecter à l'application" as UC_Connexion
+    usecase "Effectuer une action" as UC_Action
+    usecase "Générer un log" as UC_LogGeneration
+    usecase "Envoyer le log au serveur Syslog" as UC_LogEnvoi
+    usecase "Interroger la base de données" as UC_DBQuery
+}
+
+rectangle "Serveur Syslog" {
+    usecase "Recevoir les logs" as UC_LogReception
+    usecase "Stocker les logs" as UC_LogStockage
+    usecase "Envoyer accusé de réception" as UC_LogAck
+}
+
+User --> UC_Connexion
+User --> UC_Action
+
+UC_Action --> UC_LogGeneration : <<include>>
+UC_LogGeneration --> UC_LogEnvoi : <<include>>
+UC_LogEnvoi --> UC_LogReception
+UC_LogReception --> UC_LogStockage
+UC_LogStockage --> UC_LogAck : <<extend>>
+UC_LogAck --> UC_LogEnvoi
+
+UC_Action --> UC_DBQuery
+
+UC_Action <|.. UC_Connexion : <<extend>>
+
+@enduml
