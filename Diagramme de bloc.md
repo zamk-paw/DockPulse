@@ -4,14 +4,14 @@ flowchart TD
     %% Diagramme de blocs - Dockpulse et rsyslog
 
     %% Acteur
-    Utilisateur(["Utilisateur"])
+    Utilisateur["Utilisateur"]
 
     %% Blocs
-    Dockpulse["Dockpulse<br>(Serveur d'application)"]
-    Rsyslog["rsyslog<br>(Serveur de logs)"]
+    Dockpulse["Dockpulse\n(Serveur d'application)"]
+    Rsyslog["rsyslog\n(Serveur de logs)"]
 
     %% Flèches / relations
-    Utilisateur -->|Effectue une action<br>(ex: connexion)| Dockpulse
+    Utilisateur -->|Effectue une action\n(ex: connexion)| Dockpulse
     Dockpulse -->|Gère l'action utilisateur| Dockpulse
     Dockpulse -->|Génère un message de log| Dockpulse
     Dockpulse -->|Envoie le message de log| Rsyslog
