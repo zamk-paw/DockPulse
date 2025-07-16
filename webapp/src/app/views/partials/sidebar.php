@@ -1,10 +1,10 @@
-<!-- views/partials/sidebar.php -->
-<aside class="w-64 bg-gray-800 text-white min-h-screen">
-  <ul class="p-4 space-y-2">
-    <li><a href="/dashboard.php" class="block px-3 py-2 rounded hover:bg-gray-700">Tableau de bord</a></li>
-    <li><a href="/application.php" class="block px-3 py-2 rounded hover:bg-gray-700">Application</a></li>
-    <li><a href="/logs.php" class="block px-3 py-2 rounded hover:bg-gray-700">Logs</a></li>
-    <li><a href="/admin.php" class="block px-3 py-2 rounded hover:bg-gray-700">Administration</a></li>
-  </ul>
+<aside class="bg-gray-800 text-white w-64 p-4 space-y-4">
+  <a href="/dashboard" class="block px-3 py-2 rounded hover:bg-gray-700">🏠 Accueil</a>
+  <a href="/logs" class="block px-3 py-2 rounded hover:bg-gray-700">📋 Logs</a>
+  <a href="/application" class="block px-3 py-2 rounded hover:bg-gray-700">⚙️ Applications</a>
+  <?php if (($userRole ?? 'guest') === 'admin'): ?>
+    <a href="/admin" class="block px-3 py-2 rounded hover:bg-gray-700">🔧 Administration</a>
+  <?php endif; ?>
 </aside>
-<section class="flex-1 p-6">
+<main class="flex-1 p-6">
+

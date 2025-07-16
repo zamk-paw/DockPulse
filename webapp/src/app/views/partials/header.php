@@ -1,19 +1,29 @@
-<!-- views/partials/header.php -->
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+$userRole = $_SESSION['user_role'] ?? 'guest';
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DockPulse</title>
+  <title><?php echo $pageTitle ?? 'DockPulse'; ?></title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50 text-gray-800">
-  <header class="bg-gray-900 text-white px-6 py-4 flex justify-between items-center">
+<body class="bg-gray-100 min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="bg-gray-900 text-white p-4 flex justify-between items-center">
     <h1 class="text-xl font-bold">DockPulse</h1>
-    <nav>
-      <a href="/index.php" class="px-3 hover:text-gray-300">Accueil</a>
-      <a href="/logs.php" class="px-3 hover:text-gray-300">Logs</a>
-      <a href="/admin.php" class="px-3 hover:text-gray-300">Administration</a>
-    </nav>
+    <div>
+      <?php if (isset($_SESSION['user_id'])): ?>
+        <span class="mr-4">Connecté en tant que <strong><?php echo htmlspecialchars($userRole); ?></strong></span>
+        <a href="/auth/logout" class="bg-red-600 px-3 py-1 rounded hover:bg-red-700">Se déconnecter</a>
+      <?php else: ?>
+        <a href="/auth/login" class="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700">Se connecter</a>
+      <?php endif; ?>
+    </div>
   </header>
-  <main class="flex">
+
+  <div class="flex flex-1">
