@@ -21,14 +21,12 @@ class User {
         ]);
     }
 
-    // ✅ nouvelle méthode pour mettre à jour le rôle
     public static function updateRole(int $id, string $role) {
         $pdo = getPDO();
         $stmt = $pdo->prepare("UPDATE users SET role = :r WHERE id = :id");
         return $stmt->execute(['r' => $role, 'id' => $id]);
     }
 
-    // ✅ nouvelle méthode pour supprimer un utilisateur
     public static function delete(int $id) {
         $pdo = getPDO();
         $stmt = $pdo->prepare("DELETE FROM users WHERE id = :id");

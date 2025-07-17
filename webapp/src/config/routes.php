@@ -84,6 +84,24 @@ if ($uri === '/admin/delete-user' && ($_SESSION['user_role'] ?? 'guest') === 'ad
     exit;
 }
 
+if ($uri === '/logs') {
+    $pageTitle = "Logs - DockPulse";
+    include __DIR__ . '/../app/views/logs.php';
+    exit;
+}
+
+if ($uri === '/application') {
+    $pageTitle = "Applications - DockPulse";
+    include __DIR__ . '/../app/views/application.php';
+    exit;
+}
+
+if ($uri === '/application/view') {
+    $pageTitle = "Logs d'application - DockPulse";
+    include __DIR__ . '/../app/views/application_view.php';
+    exit;
+}
+
 // -------- SI AUCUNE ROUTE NE CORRESPOND -------- //
 http_response_code(404);
 echo "<h1>404</h1><p>Page non trouvée : $uri</p>";
