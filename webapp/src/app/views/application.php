@@ -9,13 +9,17 @@ $pdo = getLogsPDO();
 
 $userRole = $_SESSION['user_role'] ?? 'guest';
 
-// --- Récupération des services ---
-if ($userRole === 'admin') {
-    $stmt = $pdo->query("SELECT SysLogTag, COUNT(*) AS total FROM SystemEvents GROUP BY SysLogTag ORDER BY total DESC LIMIT 50");
-} else {
-    $stmt = $pdo->prepare("SELECT SysLogTag, COUNT(*) AS total FROM SystemEvents WHERE SysLogTag LIKE :docker GROUP BY SysLogTag ORDER BY total DESC");
-    $stmt->execute(['docker' => '%docker%']);
+// 🔒 Bloquer l'accès si ce n'est pas un admin
+if ($userRole !== 'admin') {
+    http_response_code(403);
+    include __DIR__ . '/partials/header.php';
+    echo '<div class="p-6 text-center text-red-700 font-bold text-xl">🚫 Accès refusé : cette page est réservée aux administrateurs.</div>';
+    include __DIR__ . '/partials/footer.php';
+    exit;
 }
+
+// --- Récupération des services pour l'admin ---
+$stmt = $pdo->query("SELECT SysLogTag, COUNT(*) AS total FROM SystemEvents GROUP BY SysLogTag ORDER BY total DESC LIMIT 50");
 $services = $stmt->fetchAll();
 
 $pageTitle = "Applications - DockPulse";
@@ -24,12 +28,7 @@ include __DIR__ . '/partials/sidebar.php';
 ?>
 
 <h2 class="text-2xl font-bold mb-4">⚙️ Applications surveillées</h2>
-
-<?php if ($userRole === 'admin'): ?>
-  <p class="mb-4">En tant qu'administrateur, vous voyez toutes les sources de logs récupérées par Rsyslog.</p>
-<?php else: ?>
-  <p class="mb-4 text-yellow-700">En tant qu'utilisateur invité, vous ne voyez que les logs Docker.</p>
-<?php endif; ?>
+<p class="mb-4">En tant qu'administrateur, vous voyez toutes les sources de logs récupérées par Rsyslog.</p>
 
 <!-- Liste des services -->
 <div class="overflow-x-auto mb-8">
