@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../models/User.php';
 
 class AuthController {
-    public function login() {
+    public function login(): void {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = trim($_POST['email'] ?? '');
             $password = trim($_POST['password'] ?? '');
@@ -22,7 +22,7 @@ class AuthController {
         include __DIR__ . '/../views/auth/login.php';
     }
 
-    public function register() {
+    public function register(): void {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $username = trim($_POST['username'] ?? '');
             $email = trim($_POST['email'] ?? '');
@@ -48,9 +48,10 @@ class AuthController {
         include __DIR__ . '/../views/auth/register.php';
     }
 
-    public function logout() {
+    public function logout(): void {
         session_destroy();
         header('Location: /auth/login');
         exit;
     }
 }
+

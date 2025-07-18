@@ -74,4 +74,3 @@ include __DIR__ . '/partials/sidebar.php';
 </script>
 
 <?php include __DIR__ . '/partials/footer.php'; ?>
-

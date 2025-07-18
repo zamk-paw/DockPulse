@@ -3,7 +3,7 @@ require_once __DIR__ . '/../models/User.php';
 
 class AdminController {
 
-    public function changeRole() {
+    public function changeRole(): void {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['user_id'])) {
             $userId = (int)$_POST['user_id'];
             $newRole = $_POST['new_role'] === 'admin' ? 'admin' : 'guest';
@@ -20,7 +20,7 @@ class AdminController {
         }
     }
 
-    public function deleteUser() {
+    public function deleteUser(): void {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['user_id'])) {
             $userId = (int)$_POST['user_id'];
 
@@ -36,3 +36,4 @@ class AdminController {
         }
     }
 }
+

@@ -38,4 +38,3 @@ include __DIR__ . '/partials/sidebar.php';
 </div>
 
 <?php include __DIR__ . '/partials/footer.php'; ?>
-
